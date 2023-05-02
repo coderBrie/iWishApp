@@ -1,10 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="Views\EventCategory\**" />
+    <Compile Remove="Views\Events\**" />
+    <Content Remove="ViewModels\**" />
+    <Content Remove="Views\EventCategory\**" />
+    <Content Remove="Views\Events\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Views\EventCategory\**" />
+    <EmbeddedResource Remove="Views\Events\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="Views\EventCategory\**" />
+    <None Remove="Views\Events\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\Events\" />
@@ -17,10 +32,7 @@
     <None Remove="Views\Tag\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Events\" />
     <Folder Include="Data\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\EventCategory\" />
     <Folder Include="Views\Tag\" />
   </ItemGroup>
   <ItemGroup>
