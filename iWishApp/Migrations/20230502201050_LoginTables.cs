@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace iWishApp.Data.Migrations
+namespace iWishApp.Migrations
 {
-    public partial class userlogintables : Migration
+    public partial class LoginTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

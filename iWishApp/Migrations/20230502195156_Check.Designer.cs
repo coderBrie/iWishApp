@@ -8,11 +8,11 @@ using iWishApp.Data;
 
 #nullable disable
 
-namespace iWishApp.Data.Migrations
+namespace iWishApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230429074750_SecondMigAddAuth")]
-    partial class SecondMigAddAuth
+    [Migration("20230502195156_Check")]
+    partial class Check
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,29 +20,6 @@ namespace iWishApp.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("iWishApp.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserLogin");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
