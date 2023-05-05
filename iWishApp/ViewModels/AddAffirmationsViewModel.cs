@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace iWishApp.ViewModels
 {
 	public class AddAffirmationsViewModel
