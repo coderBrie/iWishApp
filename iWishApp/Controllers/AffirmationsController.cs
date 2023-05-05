@@ -27,8 +27,10 @@ namespace iWishApp.Controllers
 
         [HttpGet]
         public IActionResult Add()
-        {
-            return View();
+        {//put a n empty add affirmations view model
+
+            AddAffirmationsViewModel addAffirmationsViewModel = new AddAffirmationsViewModel();
+            return View(addAffirmationsViewModel);
         }
 
         [HttpPost]

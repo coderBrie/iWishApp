@@ -1,16 +1,33 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using iWishApp.Models;
 
 namespace iWishApp.Data;
 
+
+
 public class ApplicationDbContext : IdentityDbContext
 {
+
+    public DbSet<Affirmations> Affirmations { get; set; }
+
+   
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Affirmations>().ToTable("Wishlist");
+        base.OnModelCreating(modelBuilder);
+    }
+
+
+
+
 }
 /*    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
