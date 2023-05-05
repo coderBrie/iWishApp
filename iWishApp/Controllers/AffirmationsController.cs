@@ -1,83 +1,68 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iWishApp.Models;
+using iWishApp.ViewModels;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using iWishApp.Data;
 
 namespace iWishApp.Controllers
 {
     public class AffirmationsController : Controller
+
+
+
     {
-        // GET: HomeController
-        public ActionResult Index()
+
+        private ApplicationDbContext _context;
+        public AffirmationsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            List<Affirmations> affirmations = _context.Affirmations.ToList();
+            return View(affirmations);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
         {
             return View();
         }
 
-        // GET: HomeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: HomeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HomeController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Add(AddAffirmationsViewModel viewModel)
         {
-            try
+
+            if (ModelState.IsValid)
             {
+                Affirmations affirmation = new Affirmations(viewModel.Name, viewModel.Category, viewModel.Text);
+                _context.Affirmations.Add(affirmation);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(viewModel);
         }
 
-        // GET: HomeController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: HomeController/Edit/5
+        // POST: Affirmations/Delete
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Delete(int[] affirmationIds)
         {
-            try
+            foreach (int id in affirmationIds)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                Affirmations affirmation = _context.Affirmations.Find(id);
 
-        // GET: HomeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+                if (affirmation != null)
+                {
+                    _context.Affirmations.Remove(affirmation);
+                }
+            }
 
-        // POST: HomeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
