@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace iWishApp.Models
 {
     public class Affirmations
     {
-        public class Affirmations
-        {
+        
+        
             public int Id { get; set; }
             static private int nextId = 1;
 
@@ -32,4 +34,3 @@ namespace iWishApp.Models
 
     }
 
-}
