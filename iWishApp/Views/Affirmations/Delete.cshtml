@@ -1,7 +1,17 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-    
-*@
-@{
-}
+﻿using System;
+<h1>Delete Affirmation</h1>
+<form method="post">
+    @foreach (var affirmation in ViewBag.affirmations)
+    {
+        <div class="form-group">
+            <label>
+                <span>@affirmation.Name</span>
+                <input type="checkbox" name="affirmationIds" value="@affirmation.Id" class="form-control">
+            </label>
+        </div>
+    }
+
+    <input type="submit" value="Delete Selected Affirmations" class="btn btn-danger">
+</form>
+
 
