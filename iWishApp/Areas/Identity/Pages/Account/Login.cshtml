@@ -2,15 +2,26 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login to Recive Your Affirmations";
 }
-
-<h1>@ViewData["Title"]</h1>
+<h1 style="color:rebeccapurple">@ViewData["Title"]</h1>
 <div class="row">
-    <div class="col-md-4">
+    @*<div class="col-md-4">*@
+        <div class="align-content-left">
         <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+            <style>
+                body 
+                {
+                    background-color:black;
+                    background-image: url('https://www.shutterstock.com/image-vector/every-day-fresh-start-inspirational-260nw-739894411.jpg');
+                    background-repeat: no-repeat;
+                    background-size: auto;
+                    background-attachment: fixed;
+                    background-position: center bottom;
+                }
+            </style>
+            <form  id="account" method="post">
+                @*<h2 style="color:yellow";></h2>*@
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
@@ -24,7 +35,7 @@
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div>
-                    <div class="checkbox">
+                    <div style="color:rebeccapurple"class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
@@ -32,23 +43,29 @@
                     </div>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-sn btn-primary">Log In</button> <button onclick="client.requestCode();"class="w-100 btn btn-lg btn-primary">Log In with Google</button>
+                    
                 </div>
                 <div>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a style="color:rebeccapurple" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a style="color:rebeccapurple" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a style="color:rebeccapurple" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
                 </div>
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+ </div>
+ 
+  <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')"> </script> 
+ 
+    
+   @* <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to log in.</h3>
             <hr />
@@ -79,7 +96,7 @@
         </section>
     </div>
 </div>
-
+@**@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
