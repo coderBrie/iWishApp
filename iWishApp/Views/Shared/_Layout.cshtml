@@ -29,9 +29,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-yellow" asp-area="" asp-controller="Affirmations" asp-action="Add">Add A Affirmation</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-yellow" asp-area="" asp-controller="Affirmations" asp-action="Delete">Delete Affirmation</a>
-                        </li>
+
+                        @*// found that Delete page below is not needed for delete crud feature//*@
+                        @*<li class="nav-item">
+                            <a class="nav-link text-yellow" asp-area="" asp-controller="Affirmations" asp-action="Delete">Delete Affirmation</a>*@
+                        @*</li>*@
                         <li class="nav-item">
                             <a class="nav-link text-yellow" asp-area="" asp-controller="Affirmations" asp-action="Index">Wishlist</a>
                         </li>
