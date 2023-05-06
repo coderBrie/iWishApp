@@ -1,4 +1,4 @@
-﻿using System;
+﻿@using System;
 @model List<iWishApp.Models.Affirmations>
 @using iWishApp.ViewModels;
 
@@ -19,9 +19,9 @@
                 <li class="list-group-item">
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="delete" name="delete" value="@affirmation.Id">
-                        <label class="form-check-label" for="delete">
-                            Delete
+                        <input class="form-check-input" type="checkbox" id="Add" name="Add" value="@affirmation.Id">
+                        <label class="form-check-label" for="Add">
+                            @affirmation.Text
                         </label>
                     </div>
                 </li>
