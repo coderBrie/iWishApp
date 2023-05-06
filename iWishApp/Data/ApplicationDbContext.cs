@@ -10,7 +10,7 @@ namespace iWishApp.Data;
 public class ApplicationDbContext : IdentityDbContext
 {
 
-    public DbSet<Affirmations> Affirmations { get; set; }
+    public DbSet<Affirmations>? Affirmations { get; set; }
 
    
 

@@ -31,8 +31,9 @@
 </div>
 <div class="text-center mt-4">
     <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
+    <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>
     <button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
 </div>
-<form id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete">
-    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+<form> <a id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete"> </a>
+    @*<input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />*@
 </form>
