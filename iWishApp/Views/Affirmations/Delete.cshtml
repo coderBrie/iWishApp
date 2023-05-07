@@ -4,24 +4,20 @@
 @using iWishApp.Data;
 @using iWishApp;
 
-<h1>Delete Affirmation</h1>
+<h1>Delete Affirmations</h1>
+
 <form method="post">
-    @foreach (var affirmation in ViewBag.Affirmations)
+    @foreach (var affirmation in ViewBag.affirmations)
     {
         <div class="form-group">
             <label>
-
-                <p><a asp-controller="Job" asp-action="Delete">Delete Job</a></p>
-
-                @*<span>@affirmation.Name</span>
-        <input type="checkbox" name="affirmationIds" value="@affirmation.Id" class="form-control">*@
+                <span>@affirmation.Text</span>
+                <input type="checkbox" name="affirmationIds" value="@affirmation.Id" class="form-control">
             </label>
         </div>
     }
-    @*<p><a asp-controller="Job" asp-action="Delete">Delete Job</a></p>*@
-
 
     <input type="submit" value="Delete Selected Affirmations" class="btn btn-danger">
-</form>
 
+</form>
 
