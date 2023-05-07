@@ -39,7 +39,7 @@ namespace iWishApp.Controllers
 
             if (ModelState.IsValid)
             {
-                Affirmations affirmation = new Affirmations(viewModel.Name, viewModel.Category, viewModel.Text);
+                Affirmations affirmation = new Affirmations(viewModel.Text);
                 _context.Affirmations.Add(affirmation);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
