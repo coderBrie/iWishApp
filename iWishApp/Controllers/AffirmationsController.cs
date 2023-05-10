@@ -105,7 +105,36 @@ namespace iWishApp.Controllers
             return View();
         }
 
+        //<----------- Add Blog Entry to database ----------->
 
+
+        //[HttpPost]
+        //public IActionResult Add(BlogEntryViewModel viewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //Affirmations affirmation = new Affirmations(viewModel.Content);
+        //        //_context.Affirmations.Add(affirmation);
+
+        //        BlogEntry blogEntry = new BlogEntry
+        //        {
+        //            Title = viewModel.Title,
+        //            Content = viewModel.Content,
+        //            CreatedAt = DateTime.Now
+        //        };
+        //        _context.BlogEntries.Add(blogEntry);
+
+        //        _context.SaveChanges();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(viewModel);
+        //}
+
+
+
+
+
+        //<------------End Blog Entry to Database -------------->
 
         [HttpPost]
         public IActionResult Delete(int[] affirmationIds)

@@ -7,7 +7,7 @@
 }
 <
 <head>
-    <title>Andrea - Free Bootstrap 4 Template by Colorlib</title>
+    @*<title>Andrea - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -32,39 +32,39 @@
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">*@
 </head>
-<div
-<h1 class="display-4 text-center">Positive Affirmations</h1>
+<div>
+    <h1 class="display-4 text-center">Positive Affirmations</h1>
 
 
-@if (Model.Count == 0)
-{
-    <p>No affirmations yet!</p>
-}
-else
-{
-    <ul class="list-group mt-4">
-        @foreach (var affirmation in Model)
+        @if (Model.Count == 0)
         {
-            <li class="list-group-item">
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="Add" name="Add" value="@affirmation.Id">
-                    <label class="form-check-label" for="Add">
-                        @affirmation.Text
-                    </label>
-                </div>
-            </li>
+            <p>No affirmations yet!</p>
         }
-    </ul>
-}
-</div>
-@*<------------------------------------------------------------------------------------------------------------------------>*@
+        else
+        {
+            <ul class="list-group mt-4">
+                @foreach (var affirmation in Model)
+                {
+                    <li class="list-group-item">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="Add" name="Add" value="@affirmation.Id">
+                            <label class="form-check-label" for="Add">
+                                @affirmation.Text
+                            </label>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        </div>
+    @*<------------------------------------------------------------------------------------------------------------------------>*@
 
 
 
-<div class="container">
+    <div class="container">
     <div class="row d-flex">
         <div class="col-xl-8 py-5 px-md-5">
             <div class="row pt-md-4">
@@ -75,46 +75,40 @@ else
                             <a asp-controller="Affirmations" asp-action="Add"class="img img-2" style="background-image: url(images/image_1.jpg);"></a>
                             <div class="text text-2 pl-md-4">
                                 <h3 class="mb-2"><a asp-controller="Affirmations" asp-action="Index">@affirmation.Text</a></h3>
-                                <div class="meta-wrap">
-                                    @*<p class="meta">
-                                        <span><i class="icon-calendar mr-2"></i>@affirmation.Date</span>
-                                        <span><a href="#"><i class="icon-folder-o mr-2"></i>Travel</a></span>
-                                        <span><i class="icon-comment2 mr-2"></i>@affirmation.CommentsCount Comment</span>
-                                    </p>*@
+                                <div class="meta-wrap">-->
+    </div>
+                                    <p class="mb-4">@affirmation.Text</p>
+                                    <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                 </div>
-                                <p class="mb-4">@affirmation.Text</p>
-                                <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
+    @*<--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        *@
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <label for="SearchString">Search and you shall find: </label>
+                <input type="Text" name="SearchString"
+                       value="@ViewBag.CurrentFilter" />
 
+                @*button for search feature*@
 
-    @*<--------------------------------------------------------------------------------------------------------------------------------------------------------------------->*@
-    <form asp-action="Index" method="get">
-        <div class="form-group">
-            <label for="SearchString">Search and you shall find: </label>
-            <input type="Text" name="SearchString"
-                   value="@ViewBag.CurrentFilter" />
+                <input type="submit" value="Searching" class="btn btn-primary" />
 
-            @*button for search feature*@
-
-            <input type="submit" value="Searching" class="btn btn-primary" />
-
-        </div>
-    </form>
-    <div class="text-center mt-4">
-        <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
-        <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>
-        @*<button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
-            </div>*@
+            </div>
+        </form>
+        <div class="text-center mt-4">
+            <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
+            <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>
+            @*<button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
+        </div>*@
         <form>
             <a id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete"> </a>
-            @*<input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />*@
+            @*<input type="hidden" name="returnUrl" value="@ViewData[" ReturnUrl"]" />*@
         </form>

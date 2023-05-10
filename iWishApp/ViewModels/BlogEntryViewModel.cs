@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
-
+using iWishApp.Controllers;
+using iWishApp.Models;
+using iWishApp.Data;
 namespace iWishApp.ViewModels
 {
     public class BlogEntryViewModel
@@ -21,6 +23,8 @@ namespace iWishApp.ViewModels
         public string Category { get; set; }
 
         public List<string> Tags { get; set; }
+
+
     }
 }
 
