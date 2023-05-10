@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using iWishApp.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+
 namespace iWishApp.Controllers
 {
     public class AffirmationsController : Controller
@@ -118,6 +120,50 @@ namespace iWishApp.Controllers
 
             return Redirect("/Affirmations");
         }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var blogEntry = _context.BlogEntries.Find(id);
+            if (blogEntry == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new BlogEntryViewModel
+            {
+                Id = blogEntry.Id,
+                Title = blogEntry.Title,
+                Content = blogEntry.Content
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(BlogEntryViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var blogEntry = _context.BlogEntries.Find(viewModel.Id);
+                if (blogEntry == null)
+                {
+                    return NotFound();
+                }
+
+                blogEntry.Title = viewModel.Title;
+                blogEntry.Content = viewModel.Content;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(viewModel);
+        }
+
+
 
         // POST: Affirmations/Delete
         //    [HttpPost]
