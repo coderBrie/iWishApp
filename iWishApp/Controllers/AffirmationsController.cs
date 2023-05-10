@@ -82,29 +82,6 @@ namespace iWishApp.Controllers
 
 
 
-        ////[HttpGet]
-        //public IActionResult Search(string SearchString)
-
-        //{
-        //    ViewData["CurrentFilter"] = SearchString;
-        //    var affirmations2 = from a in _context.Affirmations
-        //                       select a;
-
-        //    if (!String.IsNullOrEmpty(SearchString))
-        //    {
-
-        //        affirmations2 = affirmations2.Where(a => a.Text.Contains(SearchString));
-
-
-        //    }
-
-        //    return View(affirmations2);
-
-        //    //add feature below//
-        //    //List<Affirmations> affirmations = _context.Affirmations.ToList();
-        //    //return View(affirmations);
-        //}
-
         [HttpPost]
         public IActionResult Add(AddAffirmationsViewModel viewModel)
         {
@@ -125,6 +102,9 @@ namespace iWishApp.Controllers
 
             return View();
         }
+
+
+
         [HttpPost]
         public IActionResult Delete(int[] affirmationIds)
         {

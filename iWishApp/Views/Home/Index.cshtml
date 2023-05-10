@@ -27,38 +27,47 @@
 
 
             @*<--------------------------------------- Crud feature ---------------------------------------------------------->*@
-        @*<------ add aword wrap for the span tag ----->*@
+            @*<------ add aword wrap for the span tag ----->*@
+            @*<div class="colorlib-footer">
+        <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"> 444 <span>Affirmations</span></a></h1>
+        <div class="mb-4">
+            <h3>Add to Wishlist</h3>
+            <form action="#" class="colorlib-subscribe-form">
+                <div class="form-group d-flex">
+                    <div class="icon"><span class="icon-paper-plane"></span></div>
+                    <input type="text" class="form-control" placeholder="Enter Affirmations">
+                </div>
+            </form>
+            is license
+        </div>*@
+
+
             <div class="colorlib-footer">
                 <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"> 444 <span>Affirmations</span></a></h1>
                 <div class="mb-4">
-                    <h3>Subscribe for newsletter</h3>
-                    <form action="#" class="colorlib-subscribe-form">
+                    <h3>Add to Wishlist</h3>
+                    <form action="@Url.Action("Add", "Affirmations")" method="post" class="colorlib-subscribe-form">
                         <div class="form-group d-flex">
                             <div class="icon"><span class="icon-paper-plane"></span></div>
-                            <input type="text" class="form-control" placeholder="Enter Email Address">
+                            <input type="text" name="Text" class="form-control" placeholder="Enter Affirmations">
                         </div>
+                        <input type="submit" value="Add to Wishlist" class="btn btn-primary">
                     </form>
-                    is license
                 </div>
-                @*<--------------------->*@
-
-                <!--<div class="text-center mt-4">
-            <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
-            <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>-->
-                @*<button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
-            </div>*@
-                <!--<form>
-            <a id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete"> </a>
-            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-        </form>-->
-                @*<---------------------------------------search feature ---------------------------------------------------------->*@
-                <p class="pfooter">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Templated under CC BY 3.0. -->
-                </p>
             </div>
+
+
+            @*<--------------------->*@
+
+
+            @*<---------------------------------------search feature ---------------------------------------------------------->*@
+            <p class="pfooter">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Templated under CC BY 3.0. -->
+            </p>
+</div>
 </aside> <!-- END COLORLIB-ASIDE -->
         @*<---------------------------------------Wishlisht feature ---------------------------------------------------------->*@
         <div id="colorlib-main">
