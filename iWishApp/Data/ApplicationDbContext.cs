@@ -11,8 +11,9 @@ public class ApplicationDbContext : IdentityDbContext
 {
 
     public DbSet<Affirmations>? Affirmations { get; set; }
+    public DbSet<BlogEntry>? BlogEntries { get; set; }
 
-   
+
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
