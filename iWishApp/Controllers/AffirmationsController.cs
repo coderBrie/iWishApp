@@ -136,19 +136,36 @@ namespace iWishApp.Controllers
 
         //<------------End Blog Entry to Database -------------->
 
-        [HttpPost]
-        public IActionResult Delete(int[] affirmationIds)
-        {
-            foreach (int affirmationId in affirmationIds)
-            {
-                Affirmations theAffirmation = _context.Affirmations.Find(affirmationId);
-                _context.Affirmations.Remove(theAffirmation);
-            }
+        //[HttpPost]
+        //public IActionResult Delete(int[] affirmationIds)
+        //{
+        //    foreach (int affirmationId in affirmationIds)
+        //    {
+        //        Affirmations theAffirmation = _context.Affirmations.Find(affirmationId);
+        //        if (theAffirmation != null)
+        //        {
+        //            _context.Affirmations.Remove(theAffirmation);
+        //        }
+        //    }
 
-            _context.SaveChanges();
+        //    _context.SaveChanges();
 
-            return Redirect("/Affirmations");
-        }
+        //    return Redirect("/Affirmations");
+        //}
+
+        //[HttpPost]
+        //public IActionResult Delete(int[] affirmationIds)
+        //{
+        //    foreach (int affirmationId in affirmationIds)
+        //    {
+        //        Affirmations theAffirmation = _context.Affirmations.Find(affirmationId);
+        //        _context.Affirmations.Remove(theAffirmation);
+        //    }
+
+        //    _context.SaveChanges();
+
+        //    return Redirect("/Affirmations");
+        //}
 
 
         [HttpGet]
@@ -195,22 +212,22 @@ namespace iWishApp.Controllers
 
 
         // POST: Affirmations/Delete
-        //    [HttpPost]
-        //    public IActionResult Delete(int[] affirmationIds)
-        //    {
-        //        foreach (int affirmationid in affirmationIds)
-        //        {
-        //            Affirmations affirmation = _context.Affirmations.Find(affirmationid);
+           [HttpPost]
+           public IActionResult Delete(int[] affirmationIds)
+           {
+              foreach (int affirmationid in affirmationIds)
+                {
+                   Affirmations affirmation = _context.Affirmations.Find(affirmationid);
 
-        //            if (affirmation != null)
-        //            {
-        //                _context.Affirmations.Remove(affirmation);
-        //            }
-        //        }
+                   if (affirmation != null)
+                  {
+                      _context.Affirmations.Remove(affirmation);
+                   }
+                }
 
-        //        _context.SaveChanges();
+               _context.SaveChanges();
 
-        //        return RedirectToAction("Index");
-        //    }
+               return RedirectToAction("Index");
+            }
     }
 }
