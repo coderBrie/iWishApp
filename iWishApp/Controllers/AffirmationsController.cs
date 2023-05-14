@@ -168,46 +168,46 @@ namespace iWishApp.Controllers
         //}
 
 
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var blogEntry = _context.BlogEntries.Find(id);
-            if (blogEntry == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet]
+        //public IActionResult Edit(int id)
+        //{
+        //    var blogEntry = _context.BlogEntries.Find(id);
+        //    if (blogEntry == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var viewModel = new BlogEntryViewModel
-            {
-                Id = blogEntry.Id,
-                Title = blogEntry.Title,
-                Content = blogEntry.Content
-            };
+        //    var viewModel = new BlogEntryViewModel
+        //    {
+        //        Id = blogEntry.Id,
+        //        Title = blogEntry.Title,
+        //        Content = blogEntry.Content
+        //    };
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
-        [HttpPost]
-        public IActionResult Edit(BlogEntryViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var blogEntry = _context.BlogEntries.Find(viewModel.Id);
-                if (blogEntry == null)
-                {
-                    return NotFound();
-                }
+        //[HttpPost]
+        //public IActionResult Edit(BlogEntryViewModel viewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var blogEntry = _context.BlogEntries.Find(viewModel.Id);
+        //        if (blogEntry == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-                blogEntry.Title = viewModel.Title;
-                blogEntry.Content = viewModel.Content;
+        //        blogEntry.Title = viewModel.Title;
+        //        blogEntry.Content = viewModel.Content;
 
-                _context.SaveChanges();
+        //        _context.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
 
 
