@@ -21,11 +21,11 @@
         <aside id="colorlib-aside" role="complementary" class="js-fullheight">
             <nav id="colorlib-main-menu" role="navigation">
                 <ul>
-                    <li class="colorlib-active"><a href="index.html">Home</a></li>
+                    <li class="colorlib-active"><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Affirmations" asp-action="Index">Affirmations</a></li>
-                    <li><a href="travel.html">Travel</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="travel.html">Manifest</a></li>
+                    <li><a href="about.html">Register</a></li>
+                    <li><a href="contact.html">Login</a></li>
                 </ul>
             </nav>
 
@@ -91,9 +91,9 @@
                                                 <span><i class="icon-calendar mr-2"></i>June 28, 2019</span>
                                                 <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>
                                                 <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-                                                
+
                                         </div>
-    @*<div class="text text-2 pl-md-4">
+                                        @*<div class="text text-2 pl-md-4">
         <h3 class="mb-2"><a href="single.html">@Model.Title</a></h3>
         <div class="meta-wrap">
             <p class="meta">
@@ -103,15 +103,23 @@
                 <span><a href="@Url.Action("Edit", "Blog", new { id = Model.Id })" class="btn btn-primary">Edit</a></span>
             </p>
         </div>*@
-        @*<p>@Model.Content</p>
-    </div>*@
+                                        @*<p>@Model.Content</p>
+        </div>*@
 
-    @*<--------------------------------------- Wishlist feature ---------------------------------------------------------->*@
+                                        @*<--------------------------------------- Wishlist feature ---------------------------------------------------------->*@
 
 
-    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-    <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
-    </div>
+                                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+
+                                        @*<------insert Audio File ------------>*@
+                                        <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+
+                                        <audio controls>
+                                            <source src="/images/MeditationIntro.m4a" type="audio/mp3" />
+                                        </audio>
+
+                                        @*<------insert Audio File end ------------>*@
+                                    </div>
     </div>
     </div>
 

@@ -4,104 +4,198 @@
 @using iWishApp.Controllers;
 @using iWishApp.Data;
 
+
+
 @{
     ViewData["Title"] = "Positive Affirmations";
+
+
 }
-<
+
+
+
+<!DOCTYPE html>
+<html>
 <head>
 
 
+    @*<StickyNavbar />, document.getElementById('sticky-navbar-container'));
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>@ViewData["Positive Affirmationsc"]</title>*@
+
+    <!-- Add the necessary CSS and JS files for React Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Make sure to include React and ReactDOM libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+
+    <!-- Make sure to include Babel standalone for JSX transpilation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.15.8/babel.min.js"></script>
+
+    <!-- Add the necessary JS files for React Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/2.0.0/react-bootstrap.min.js"></script>
+
+    <link href="/Users/briarispastiche/Projects/iWishApp/iWishApp/wwwroot/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 
 
+    <style>
+
+        
+    .affirmations-list {
+        display: flex;
+        font-size:300px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;  Set the height to 100% of the viewport height 
+        padding: 0 50px;  Adjust the padding as needed 
+        padding-top:inherit;
+    }
+
+    .affirmations-list ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .affirmations-list h3 {
+        text-align: center;
+        margin-bottom: 10px;  Adjust the margin between each affirmation 
+    }
+</style>
 
 </head>
+
 
 <body>
     <header>
 
-        <div id="colorlib-page">
-            <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-            <aside id="colorlib-aside" role="complementary" class="js-fullheight">
-                <nav id="colorlib-main-menu" role="navigation">
-                    <ul>
-                        <li class="colorlib-active"><a href="index.html">Home</a></li>
-                        <li><a asp-controller="Affirmations" asp-action="Index">Affirmations</a></li>
-                        <li><a href="travel.html">Travel</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
 
-
-                <div class="colorlib-footer">
-                    <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"> iBelieve<span class="d-inline-block text-wrap"> . .  & iAM</span></a></h1>
-                    <div class="mb-4">
-                        <h3>Add to Wishlist</h3>
-                        <form action="@Url.Action("Add", "Affirmations")" method="post" class="colorlib-subscribe-form">
-                            <div class="form-group d-flex">
-                                <div class="icon"><span class="icon-paper-plane"></span></div>
-                                <input type="text" name="Text" class="form-control" placeholder="Enter Affirmations">
-                            </div>
-                            <input type="submit" value="Add to Wishlist" class="btn btn-primary">
-                        </form>
-
-                        <form action="@Url.Action("Delete", "Affirmations")" method="post">
-                            <button type="submit" class="btn btn-danger">Delete Selected Affirmations</button>
-                        </form>
-                    </div>
-                </div>
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="color:white;">
+            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Affirmations" asp-action="Add">Change</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
 
     </header>
 
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 offset-md-2">
-                <div class="mr-md-4">
 
-                    <div style="background-color: lightpink;">
-                        <h1 class="display-4 text-center">Positive Affirmations</h1>
+    @*<Navbar bg="light" expand="lg" sticky="top" className="py-4">
+            <Navbar.Toggle aria-controls="navbar-nav" />
+            <Navbar.Collapse id="navbar-nav">
+                <Nav className="mx-auto" style={{ animation: 'fade-in 1s ease-in' }}>
+                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="#about">About</Nav.Link>
+                    <Nav.Link href="#services">Services</Nav.Link>
+                    <Nav.Link href="#contact">Contact</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>*@
+    @*);
+        };
 
-
-                        @if (Model.Count == 0)
-                        {
-                            <p>No affirmations yet!</p>
-                        }
-                        else
-                        {
-                            <ul class="list-group mt-4">
-                                @foreach (var affirmation in Model)
-                                {
+        export default StickyNavbar;*@
 
 
-                                    <li class="list-group-item">
 
-                                        <div class="form-check" id="margin-bg">
-                                            <input class="form-check-input" type="checkbox" id="Add" name="Add" value="@affirmation.Id">
-                                            <div class="margin-bg" id="margin-bg">
-                                                <label class="form-check-label" for="Add">
-                                                    @affirmation.Text
-                                                </label>
 
-                                            </div>
-                                    </li>
+    @*<div class="colorlib-footer">
+            <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"> iBelieve<span class="d-inline-block text-wrap"> . .  & iAM</span></a></h1>
+            <div class="mb-4">
+                <h3>Add to Wishlist</h3>
+                <form action="@Url.Action("Add", "Affirmations")" method="post" class="colorlib-subscribe-form">
+                    <div class="form-group d-flex">
+                        <div class="icon"><span class="icon-paper-plane"></span></div>
+                        <input type="text" name="Text" class="form-control" placeholder="Enter Affirmations">
+                    </div>
+                    <input type="submit" value="Add to Wishlist" class="btn btn-primary">
+                </form>
 
-                                }
-                            </ul>
-                        }
+                <form action="@Url.Action("Delete", "Affirmations")" method="post">
+                    <button type="submit" class="btn btn-danger">Delete Selected Affirmations</button>
+                </form>
+            </div>
+        </div>
+
+        </header>*@
+    <div class="container-fluid p-0">
+        <!-- Video background -->
+        <video src="/images/rainForest.mp4" autoplay loop muted playsinline style="position: fixed; top: 0; left: 0; width: 100%; object-fit: cover;"></video>
+
+        <div class="position-absolute top-50 start-50 translate-middle">
+
+            <div class="affirmations-list">
+
+                <div class="position-relative">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="row">
+
+                                <div class="col-md-10 offset">
+                                    <div class="mr-md-4" style="padding-top:135rem;">
+                                        @*<div style="background-color: rgba(255, 255, 255, 0.5);">*@
+
+
+                                        <h1 class="display-4 text-center" style="color: white; padding-top: 10rem; text-align:justify-all">Positive Affirmations</h1>
+
+                                        @if (Model.Count == 0)
+                                        {
+                                            <p>No affirmations yet!</p>
+                                        }
+                                        else
+                                        {
+                                            <ul class="list-group mt-4">
+                                                @foreach (var affirmation in Model)
+                                                {
+                                                    <h3 style="color:white;">
+                                                        @affirmation.Text
+                                                    </h3>
+                                                }
+                                            </ul>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        @*</div>
+                    </div>
+                </div>
+            </div>
 
 
+            </div>*@
 
+        @*< --------WORKING SERACH ------>*@
 
-
-
-    <div class="container">
+        <!--<div class="container">
         <div class="row">
             <div class="col-md-10 offset-md-2">
                 <div class="mr-md-4">
@@ -111,60 +205,54 @@
                         <div class="form-group">
                             <label for="SearchString">Search and you shall find: </label>
                             <input type="Text" name="SearchString"
-                                   value="@ViewBag.CurrentFilter" />
+                                   value="@ViewBag.CurrentFilter" />-->
+        @*button for search feature*@
 
-                            @*button for search feature*@
+        <!--<input type="submit" value="Searching" class="btn btn-primary" />
 
-                            <input type="submit" value="Searching" class="btn btn-primary" />
-
-                        </div>
-                    </form>
-                    <div class="text-center mt-4">
-                        <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
-                        <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>
-                        <button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
-                    </div>
-                    <form>
-                        <a id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete"> </a>
-                        <input type="hidden" name="returnUrl" value="@ViewData[" ReturnUrl"]" />
-                    </form>
-
-
-
-                </div>
             </div>
-        </div>
-    </div>
-
-    </div>
-    </div>
-
-
-    <div class="sidebar-box ftco-animate">
-        <h3 class="sidebar-heading">Archives</h3>
-        <ul class="categories">
-            <li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-            <li><a href="#">September 2018 <span>(6)</span></a></li>
-            <li><a href="#">August 2018 <span>(8)</span></a></li>
-            <li><a href="#">July 2018 <span>(2)</span></a></li>
-            <li><a href="#">June 2018 <span>(7)</span></a></li>
-            <li><a href="#">May 2018 <span>(5)</span></a></li>
-        </ul>
-    </div>
+        </form>-->
+        @*<div class="text-center mt-4">
+                <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
+                <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>
+                <button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
+            </div>
+            <form>
+                <a id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete"> </a>
+                <input type="hidden" name="returnUrl" value="@ViewData[" ReturnUrl"]" />
+            </form>*@
 
 
-    <div class="sidebar-box ftco-animate">
-        <h3 class="sidebar-heading">Paragraph</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
+
+
+
+        <!--<div class="sidebar-box ftco-animate">
+                <h3 class="sidebar-heading">Archives</h3>
+                <ul class="categories">
+                    <li><a href="#">Decob14 2018 <span>(10)</span></a></li>
+                    <li><a href="#">September 2018 <span>(6)</span></a></li>
+                    <li><a href="#">August 2018 <span>(8)</span></a></li>
+                    <li><a href="#">July 2018 <span>(2)</span></a></li>
+                    <li><a href="#">June 2018 <span>(7)</span></a></li>
+                    <li><a href="#">May 2018 <span>(5)</span></a></li>
+                </ul>
+            </div>
+
+
+            <div class="sidebar-box ftco-animate">
+                <h3 class="sidebar-heading">Paragraph</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
+            </div>
+        </div>-->
+        <!-- END COL -->
     </div>
-    </div><!-- END COL -->
-    </div>
-    </div>
+    <!--</div>                  </div>
     </section>
-    </div><!-- END COLORLIB-MAIN -->
-    </div><!-- END COLORLIB-PAGE -->
+    </div>-->
+    <!-- END COLORLIB-MAIN -->
+    <!--</div>--><!-- END COLORLIB-PAGE -->
     <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+    <!--<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>-->
 
 
     <script src="js/jquery.min.js"></script>
@@ -183,5 +271,22 @@
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
 
+    <script src="/Users/briarispastiche/Projects/iWishApp/iWishApp/wwwroot/css/bootstrap.min.css"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+    @*<footer class="border-top footer text-muted" style="position:fixed;">
+        <div class="container">
+            &copy; 2023 - iWishApp- <a asp-area="" asp-controller="Home" asp-action="Index">Privacy</a>
+        </div>
+    </footer>*@
 
 </body>
+
+</html>
