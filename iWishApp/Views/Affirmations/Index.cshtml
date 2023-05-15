@@ -52,8 +52,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 50vh;  Set the height to 100% of the viewport height 
-        padding: 0 50px;  Adjust the padding as needed 
+        height: 50vh; 
+        padding: 0 50px;  
         padding-top:inherit;
     }
 
@@ -64,7 +64,7 @@
 
     .affirmations-list h3 {
         text-align: center;
-        margin-bottom: 10px;  Adjust the margin between each affirmation 
+        margin-bottom: 10px;  
     }
 </style>
 
@@ -89,7 +89,7 @@
                         <a class="nav-link" asp-controller="Affirmations" asp-action="Add">Change</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                        <a class="nav-link disabled" href="#">Logout</a>
                     </li>
                 </ul>
                 <form class="form-inline mt-2 mt-md-0">
@@ -156,15 +156,15 @@
                             <div class="row">
 
                                 <div class="col-md-10 offset">
-                                    <div class="mr-md-4" style="padding-top:135rem;">
+                                    <div class="mr-md-4" style="padding-top:10rem;">
                                         @*<div style="background-color: rgba(255, 255, 255, 0.5);">*@
 
 
-                                        <h1 class="display-4 text-center" style="color: white; padding-top: 10rem; text-align:justify-all">Positive Affirmations</h1>
+                                        <h1 class="display-4 text-center" style="color: white; padding-top:initial; text-align:justify-all">Positive Affirmations</h1>
 
                                         @if (Model.Count == 0)
                                         {
-                                            <p>No affirmations yet!</p>
+                                            <p style="font-size:15px; color: whitesmoke; padding-top:1rem;">No affirmations yet!</p>
                                         }
                                         else
                                         {

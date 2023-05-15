@@ -23,6 +23,7 @@ namespace iWishApp.Controllers
 
         // start index //
         // view all affifrmation below//
+        
         public IActionResult Index(string SearchString)
         {
             ViewBag.CurrentFilter = SearchString;
@@ -73,7 +74,7 @@ namespace iWishApp.Controllers
 
         //}
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public IActionResult Add()
         {//put a n empty add affirmations view model
@@ -82,8 +83,7 @@ namespace iWishApp.Controllers
             return View(addAffirmationsViewModel);
         }
 
-
-
+        [Authorize]
         [HttpPost]
         public IActionResult Add(AddAffirmationsViewModel viewModel)
         {
@@ -97,7 +97,8 @@ namespace iWishApp.Controllers
             }
             return View(viewModel);
         }
-
+        [Authorize]
+        [HttpPost]
         public IActionResult Delete()
         {
             ViewBag.affirmations = _context.Affirmations.ToList();
