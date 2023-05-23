@@ -19,6 +19,7 @@
 <head>
 
 
+
     @*<StickyNavbar />, document.getElementById('sticky-navbar-container'));
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,28 +47,28 @@
     <style>
 
 
-    .affirmations-list {
-        display: flex;
-        font-size:300px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 50vh;
-        padding: 0 50px;
-        padding-top:inherit;
-    }
 
-    .affirmations-list ul {
-        list-style: none;
-        padding: 0;
-    }
+        .affirmations-list {
+            display: flex;
+            font-size: 300px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            padding: 0 50px;
+            padding-top: inherit;
+        }
 
-    .affirmations-list h3 {
-        text-align: center;
-        margin-bottom: 10px;
+            .affirmations-list ul {
+                list-style: none;
+                padding: 0;
+            }
 
+            .affirmations-list h3 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
 
-    }
         .hidden-heading {
             opacity: 0;
             transition: opacity 1s ease-in-out;
@@ -90,11 +91,12 @@
 
 
 <body>
+
     <header>
 
 
         <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="color:white;">
-            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <a class="navbar-brand" href="#">..&iAM</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -107,59 +109,18 @@
                         <a class="nav-link" asp-controller="Affirmations" asp-action="Add">Change</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Logout</a>
+                        <a class="nav-link disabled" asp-controller="Affirmations" asp-action="Delete">delete</a>
                     </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <form class="form-inline mt-2 mt-md-0" asp-controller="Affirmations" asp-action="Index">
+
+                    <input type="Text" name="SearchString" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Type a keyword and hit enter">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
         </nav>
 
     </header>
-
-
-
-
-    @*<Navbar bg="light" expand="lg" sticky="top" className="py-4">
-            <Navbar.Toggle aria-controls="navbar-nav" />
-            <Navbar.Collapse id="navbar-nav">
-                <Nav className="mx-auto" style={{ animation: 'fade-in 1s ease-in' }}>
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#about">About</Nav.Link>
-                    <Nav.Link href="#services">Services</Nav.Link>
-                    <Nav.Link href="#contact">Contact</Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>*@
-    @*);
-        };
-
-        export default StickyNavbar;*@
-
-
-
-
-    @*<div class="colorlib-footer">
-            <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"> iBelieve<span class="d-inline-block text-wrap"> . .  & iAM</span></a></h1>
-            <div class="mb-4">
-                <h3>Add to Wishlist</h3>
-                <form action="@Url.Action("Add", "Affirmations")" method="post" class="colorlib-subscribe-form">
-                    <div class="form-group d-flex">
-                        <div class="icon"><span class="icon-paper-plane"></span></div>
-                        <input type="text" name="Text" class="form-control" placeholder="Enter Affirmations">
-                    </div>
-                    <input type="submit" value="Add to Wishlist" class="btn btn-primary">
-                </form>
-
-                <form action="@Url.Action("Delete", "Affirmations")" method="post">
-                    <button type="submit" class="btn btn-danger">Delete Selected Affirmations</button>
-                </form>
-            </div>
-        </div>
-
-        </header>*@
     <div class="container-fluid p-0">
         <!-- Video background -->
         <video src="/images/rainForest.mp4" autoplay loop muted playsinline style="position:fixed; top: 0; left: 0; width: 100%; height:100%; object-fit: cover;"></video>
@@ -175,7 +136,7 @@
 
                                 <div class="col-md-10 offset">
                                     <div class="mr-md-4" style="padding-top: 10rem;">
-          <h1 class="display-4 text-center" style="color: white; padding-top: initial; text-align: justify-all; color: whitesmoke; text-shadow:#ffeb00;">Positive Affirmations</h1>
+                                        <h1 class="display-4 text-center" style="color: white; padding-top: initial; text-align: justify-all; color: whitesmoke; text-shadow:#ffeb00;">Positive Affirmations</h1>
 
                                         @if (Model.Count == 0)
                                         {
@@ -200,74 +161,40 @@
                 </div>
             </div>
         </div>
-        @*</div>
-                    </div>
-                </div>
-            </div>
-
-
-            </div>*@
-
-        @*< --------WORKING SERACH ------>*@
-
-        <!--<div class="container">
-        <div class="row">
-            <div class="col-md-10 offset-md-2">
-                <div class="mr-md-4">
-
-
-                    <form asp-action="Index" method="get">
-                        <div class="form-group">
-                            <label for="SearchString">Search and you shall find: </label>
-                            <input type="Text" name="SearchString"
-                                   value="@ViewBag.CurrentFilter" />-->
-        @*button for search feature*@
-
-        <!--<input type="submit" value="Searching" class="btn btn-primary" />
-
-            </div>
-        </form>-->
-        @*<div class="text-center mt-4">
-                <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmation</a>
-                <p><a asp-controller="Affirmations" asp-action="Delete">Delete Selected Affirmations</a></p>
-                <button type="submit" class="btn btn-danger" form="deleteForm">Delete Selected Affirmations</button>
-            </div>
-            <form>
-                <a id="deleteForm" method="post" asp-controller="Affirmations" asp-action="Delete"> </a>
-                <input type="hidden" name="returnUrl" value="@ViewData[" ReturnUrl"]" />
-            </form>*@
-
-
-
-
-
-        <!--<div class="sidebar-box ftco-animate">
-                <h3 class="sidebar-heading">Archives</h3>
-                <ul class="categories">
-                    <li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-                    <li><a href="#">September 2018 <span>(6)</span></a></li>
-                    <li><a href="#">August 2018 <span>(8)</span></a></li>
-                    <li><a href="#">July 2018 <span>(2)</span></a></li>
-                    <li><a href="#">June 2018 <span>(7)</span></a></li>
-                    <li><a href="#">May 2018 <span>(5)</span></a></li>
-                </ul>
-            </div>
-
-
-            <div class="sidebar-box ftco-animate">
-                <h3 class="sidebar-heading">Paragraph</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
-            </div>
-        </div>-->
-        <!-- END COL -->
     </div>
-    <!--</div>                  </div>
-    </section>
-    </div>-->
-    <!-- END COLORLIB-MAIN -->
-    <!--</div>--><!-- END COLORLIB-PAGE -->
-    <!-- loader -->
-    <!--<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>-->
+
+
+
+    @*<script src="subscribe.js"></script>
+    <script>// Function to save the content
+        function saveContent() {
+            // Get the edited title and paragraph text
+            const title = document.getElementById('title').textContent;
+            const paragraph = document.getElementById('paragraph').textContent;
+
+            // Send the content to the server
+            const data = {
+                title: title,
+                paragraph: paragraph
+            };
+
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message);
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }</script>*@
+
 
 
     <script src="js/jquery.min.js"></script>

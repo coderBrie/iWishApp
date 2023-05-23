@@ -44,14 +44,19 @@
 
 
         li {
-            color: #808080;
+            color: #F5F5DC;
             /*            font-size: 11px;*/
             /*            font-weight: 300;*/
             /*            text-shadow: 0 0 10px #da70d6;*/
-            text-shadow: 0 0 2px #00CCFF;
-            
+            text-shadow: 0 0 2px #F5F5DC;
         }
 
+
+/*        img {
+            border-color: #ffeb00;
+            border:medium;
+            margin:10px;
+        }*/
   
     </style>
 </head>
@@ -71,7 +76,7 @@
                         <ul>
                             <li class="colorlib-active"><a asp-controller="Home" asp-action="Index">Home</a></li>
                             <li><a asp-controller="Affirmations" asp-action="Index">Affirmations</a></li>
-                            <li><a href="travel.html">Manifest</a></li>
+                            <li><a asp-controller="Affirmations" asp-action="Add">Manifest</a></li>
                             <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
                             <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
                         </ul>
@@ -142,17 +147,17 @@
 
                                                 </div>
                                                 @*<div class="text text-2 pl-md-4">
-                                                    <h3 class="mb-2"><a href="single.html">@Model.Title</a></h3>
-                                                    <div class="meta-wrap">
-                                                        <p class="meta">
-                                                            <span><i class="icon-calendar mr-2"></i>@Model.DateCreated</span>
-                                                            <span><a href="single.html"><i class="icon-folder-o mr-2"></i>@Model.Category</a></span>
-                                                            <span><i class="icon-comment2 mr-2"></i>@Model.CommentCount Comment</span>
-                                                            <span><a href="@Url.Action("Edit", "Blog", new { id = Model.Id })" class="btn btn-primary">Edit</a></span>
-                                                        </p>
-                                                    </div>*@
+                    <h3 class="mb-2"><a href="single.html">@Model.Title</a></h3>
+                    <div class="meta-wrap">
+                        <p class="meta">
+                            <span><i class="icon-calendar mr-2"></i>@Model.DateCreated</span>
+                            <span><a href="single.html"><i class="icon-folder-o mr-2"></i>@Model.Category</a></span>
+                            <span><i class="icon-comment2 mr-2"></i>@Model.CommentCount Comment</span>
+                            <span><a href="@Url.Action("Edit", "Blog", new { id = Model.Id })" class="btn btn-primary">Edit</a></span>
+                        </p>
+                    </div>*@
                                                 @*<p>@Model.Content</p>
-                                                    </div>*@
+                    </div>*@
 
                                                 @*<--------------------------------------- Wishlist feature ---------------------------------------------------------->*@
 
@@ -176,23 +181,94 @@
                                         <div class="blog-entry ftco-animate d-md-flex">
                                             <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
                                             <div class="text text-2 pl-md-4">
-                                                <h3 class="mb-2"><a href="single.html">Reclaiming My Power Through Meditation:</a></h3>
-                                                <form action="@Url.Action("Edit", "BlogEntry")" method="post" class="colorlib-subscribe-form">
-                                                    <div class="meta-wrap">
+                                                <h3 class="mb-2" style="color:navy;">Thoughts- What are your Affirmations</h3>
+                                                <form action="@Url.Action("Add", "Home")" method="post" class="colorlib-subscribe-form">
+                                                    <input type="text" name="Text" class="form-control" placeholder="Enter Affirmation" style="border: none; border-bottom: 1px solid white; color: white;">
 
-                                                        <p class="meta">
-                                                            <span><i class="icon-calendar mr-2"></i>October 28, 2022</span>
-                                                            @*<span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
-                                                            <span><i class="icon-comment2 mr-2"></i>33 Comments</span>
-                                                        </p>
-                                                    </div>
+                                                    <input type="submit" value="Add to Wishlist" class="btn btn-primary">
                                                 </form>
-                                                <p class="mb-4">Reframe your inner world and your outer world will follow. Meditation is one tool that can help you redirect your path.</p>
-                                                @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
-
+                                                @*<form action="@Url.Action("Add", "Affirmations")" method="post" class="colorlib-subscribe-form">*@
+                                                @*<div class="meta-wrap">*@
+                                                @*<p class="meta">
+                        <span><i class="icon-calendar mr-2"></i>October 28, 2022</span>
+                        <span><i class="icon-comment2 mr-2"></i>33 Comments</span>
+                    </p>*@
+                                                @*</div>*@
+                                                @*</form>*@
+                                                @*<p class="mb-4">
+                        <input type="text" name="affirmationDescription" class="form-control" placeholder="Enter Description" style="border: none; border-bottom: 1px solid white; color: white;">
+                    </p>*@
+                                                @*<p>
+                        <button type="submit" class="btn btn-primary">Save Affirmation</button>
+                    </p>*@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @*<------------------------------------------------------------test    ------------------------------------------------------------------------------------------->*@
+
+
+                                <div class="col-md-12">
+                                    <div class="blog-entry ftco-animate d-md-flex">
+                                        <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                        <div class="text text-2 pl-md-4">
+                                            <h3 class="mb-2" style="color:navy;">Thoughts- What are your Affirmations</h3>
+                                            <form action="@Url.Action("AddAffirmation", "Home")" method="post" class="colorlib-subscribe-form">
+
+                                                <div>
+                                                    @if (!string.IsNullOrEmpty(ViewBag.UserAffirmation))
+                                                    {
+                                                        <div class="affirmations-list">
+                                                            <ul class="list-group mt-4">
+                                                                <h3 style="color: white;">@ViewBag.UserAffirmation</h3>
+                                                            </ul>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <input type="text" name="affirmationText" class="form-control" placeholder="Enter Affirmation" style="border: none; border-bottom: 1px solid white; color: white;">
+                                                <input type="submit" value="Add to Wishlist" class="btn btn-primary">
+
+
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+                                    @*<--------------test 222------------>*@
+
+
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2" style="color: navy;">Thoughts - What are your Affirmations</h3>
+
+                                                @if (!string.IsNullOrEmpty(ViewBag.UserAffirmation))
+                                                {
+                                                    <div class="affirmations-list">
+                                                        <ul class="list-group mt-4">
+                                                            <h3 style="color: white;">@ViewBag.UserAffirmation</h3>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form action="@Url.Action("AddAffirmation", "Home")" method="post" class="colorlib-subscribe-form">
+                                                        <input type="text" name="affirmationText" class="form-control" placeholder="Enter Affirmation" style="border: none; border-bottom: 1px solid white; color: white;">
+                                                        <input type="submit" value="Add to Wishlist" class="btn btn-primary">
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+                                    @*</-----------------------------------------------------------------test 2 ------------------------------------------------------------------------------------>>*@
 
                                     @*<--------------------------------------- wishlist feature ---------------------------------------------------------->*@
                                     <div class="col-md-12">
@@ -340,7 +416,7 @@
                                                 <div class="meta-wrap">
                                                     <p class="meta">
                                                         @*<span><i class="icon-calendar mr-2"></i>April 04, 2022</span>
-                                                            <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
+                            <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
                                                         <span><i class="icon-comment2 mr-2"></i>9 Comments</span>
                                                     </p>
                                                 </div>
@@ -384,8 +460,8 @@
                                 </div>
                             </div>
 
-                            @*<---------------------------------------search feature ---------------------------------------------------------->*@
-                            <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+                            @*<---------------------------------------working side bar search feature ---------------------------------------------------------->*@
+                            @*<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
                                     <form asp-controller="Affirmations" asp-action="Index" class="search-form">
                                         <div class="form-group">
@@ -394,7 +470,7 @@
                                             <input type="Text" name="SearchString" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Type a keyword and hit enter">
                                         </div>
                                     </form>
-                                </div>
+                                </div>*@
 
                                 @*<form asp-action="Index" method="get">
                                     <div class="form-group">
@@ -415,16 +491,16 @@
                                     </div>*@
 
                                 @*<---------------------------------------search feature ---------------------------------------------------------->*@
-                                <div class="sidebar-box ftco-animate">
+                                <!--<div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Weekly Topics</h3>
                                     <ul class="categories">
-                                        <li><a href="#">Affirmations <span>(6)</span></a></li>
-                                        <li><a href="#">Manifesting <span>(8)</span></a></li>
-                                        <li><a href="#">Meditation <span>(2)</span></a></li>
-                                        <li><a href="#">Career <span>(2)</span></a></li>
-                                        <li><a href="#">Finance <span>(7)</span></a></li>
-                                    </ul>
-                                </div>
+                                        <li><a href="#">Affirmations <span></span></a></li>
+                                        <li><a href="#">Manifesting <span></span></a></li>
+                                        <li><a href="#">Meditation <span></span></a></li>-->
+                                        @*<li><a href="#">Career <span></span></a></li>
+                                        <li><a href="#">Finance <span></span></a></li>*@
+                                    <!--</ul>
+                                </div>-->
 
                                 @*<div class="sidebar-box ftco-animate">
                                         <h3 class="sidebar-heading">Popular Articles</h3>
@@ -476,8 +552,8 @@
                                         <a href="#" class="tag-cloud-link">food</a>
                                     </ul>*@
                                 @*</div>
-                                    <----------------------------------------------------Add Feature ------------------------------------------------------------------------------------>*@
-                                <div class="sidebar-box subs-wrap img py-4" style="background-image: url(images/bg_1.jpg);">
+                                    <----------------------------------------------------Add Feature ------------------------------------ ------------------------------------- ----------->*@
+                                <!--<div class="sidebar-box subs-wrap img py-4" style="background-image: url(images/bg_1.jpg);">
                                     <div class="overlay"></div>
                                     <h3 class="mb-4 sidebar-heading">Newsletter</h3>
                                     <p class="mb-4">Subscribe to Weekly Affirmations Email List</p>
@@ -487,7 +563,7 @@
                                             <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
                                         </div>
                                     </form>
-                                </div>
+                                </div>-->
                                 @*<----end template ----->*@
 
 
@@ -506,10 +582,10 @@
                                     </div>*@
 
 
-                                <div class="sidebar-box ftco-animate">
+                                @*<div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">The iWishApp &copy;</h3>
                                     <p style="color: #212529"> iWishApp empowers individuals to set intentions, create personalized affirmations, and track their progress towards achieving their dreams. By harnessing the power of positive thinking and manifestation techniques, iWishApp serves as a transformative tool, helping users manifest their desires, cultivate a positive mindset, and ultimately lead more fulfilling lives.</p>
-                                </div>
+                                </div>*@
                             </div><!-- END COL -->
                         </div>
                     </div>
