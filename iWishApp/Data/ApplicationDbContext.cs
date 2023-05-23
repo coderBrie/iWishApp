@@ -11,7 +11,7 @@ public class ApplicationDbContext : IdentityDbContext
 {
 
     public DbSet<Affirmations>? Affirmations { get; set; }
-    
+    public DbSet<Journals>? Journals { get; set; }
 
 
 

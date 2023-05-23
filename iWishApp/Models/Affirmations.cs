@@ -15,21 +15,30 @@ namespace iWishApp.Models
         //public string Category { get; set; }
         [Required(ErrorMessage = "affirmation is required.")]
         public string Text { get; set; }
-            //public DateTime DateCreated { get; set; }
+        //public DateTime DateCreated { get; set; }
+        //public string Goal { get; set; }
+        //public string Actions { get; set; }
+        //public string Reflections { get; set; }
 
 
 
 
-            public Affirmations()
+        public Affirmations()
             {
 
             }
 
+
+        //string goal, string actions, string reflections
             public Affirmations( string text) : this()
         {
             //Name = name;
             //Category = category;
             Text = text;
+            //Goal = goal;
+            //Actions = actions;
+            //Reflections = reflections;
+
             }
         }
 
