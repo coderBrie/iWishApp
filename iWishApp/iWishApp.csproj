@@ -21,6 +21,7 @@
     <None Remove="Views\Events\**" />
     <None Remove="AddAffirmationsViewModel\" />
     <None Remove="Views\Affirmations\" />
+    <None Remove="Views\Journals\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <Folder Include="Views\Tag\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Affirmations\" />
+    <Folder Include="Views\Journals\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0" />
@@ -48,6 +50,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0" />
+    <PackageReference Include="OpenAI" Version="1.7.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0">

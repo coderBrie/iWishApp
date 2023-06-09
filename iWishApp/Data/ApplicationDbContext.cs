@@ -23,6 +23,7 @@ public class ApplicationDbContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Affirmations>().ToTable("Wishlist");
+        modelBuilder.Entity<Journals>().ToTable("Journals");
         base.OnModelCreating(modelBuilder);
     }
 

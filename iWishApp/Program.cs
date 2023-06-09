@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using iWishApp.Data;
+using iWishApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = "server=localhost;user=wishapp;password=cashmoney2000;database=user_login";
@@ -22,6 +23,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>
    options.Password.RequireUppercase = true;
    options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped<ChatbotService>(provider =>
+{
+    string apiKey = "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";
+    return new ChatbotService(apiKey);
+});
+
+
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 var app = builder.Build();

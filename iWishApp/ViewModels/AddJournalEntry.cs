@@ -1,4 +1,6 @@
 ﻿using System;
+using iWishApp.Models;
+
 namespace iWishApp.ViewModels
 {
 	public class AddJournalEntry
@@ -10,6 +12,7 @@ namespace iWishApp.ViewModels
         //public string Text { get; set; }
 
         //public DateTime DateCreated { get; set; }
+        public List<Journals> Journals { get; set; }
         public string Goals { get; set; }
         public string Actions { get; set; }
         public string Reflections { get; set; }
