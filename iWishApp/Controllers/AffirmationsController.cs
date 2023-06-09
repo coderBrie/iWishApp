@@ -1,83 +1,102 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iWishApp.Models;
+using iWishApp.ViewModels;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using iWishApp.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace iWishApp.Controllers
 {
     public class AffirmationsController : Controller
+
+
+
     {
-        // GET: HomeController
-        public ActionResult Index()
+
+        private ApplicationDbContext _context;
+        public AffirmationsController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        // GET: HomeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        // start index //
+        // view all affifrmation below//
 
-        // GET: HomeController/Create
-        public ActionResult Create()
+        public IActionResult Index(string SearchString)
         {
-            return View();
-        }
+            ViewBag.CurrentFilter = SearchString;
+            var affirmations = from a in _context.Affirmations
+                               select a;
+           
 
-        // POST: HomeController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+
+            if (!String.IsNullOrEmpty(SearchString))
             {
+                affirmations = affirmations.Where(a => a.Text.Contains(SearchString));
+            }
+
+            {
+                return View(affirmations.ToList());
+
+            }
+            
+        }
+
+
+        //[Authorize]
+        [HttpGet]
+        public IActionResult Add()
+        {//put a n empty add affirmations view model
+
+            AddAffirmationsViewModel addAffirmationsViewModel = new AddAffirmationsViewModel();
+            return View(addAffirmationsViewModel);
+        }
+
+        //[Authorize]
+        [HttpPost]
+        public IActionResult Add(AddAffirmationsViewModel viewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Affirmations affirmation = new Affirmations(viewModel.Text);
+                _context.Affirmations.Add(affirmation);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(viewModel);
         }
-
-        // GET: HomeController/Edit/5
-        public ActionResult Edit(int id)
+        //[Authorize]
+        [HttpGet]
+        public IActionResult Delete()
         {
+            ViewBag.affirmations = _context.Affirmations.ToList();
+
             return View();
         }
 
-        // POST: HomeController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+       
+       //[Authorize]
+       [HttpPost]
+        public IActionResult Delete(int[] affirmationIds)
         {
-            try
+            foreach (int affirmationid in affirmationIds)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                Affirmations affirmation = _context.Affirmations.Find(affirmationid);
 
-        // GET: HomeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+                if (affirmation != null)
+                {
+                    _context.Affirmations.Remove(affirmation);
+                }
+            }
 
-        // POST: HomeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
+
+
 }

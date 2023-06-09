@@ -1,0 +1,246 @@
+﻿@using System;
+@model List<iWishApp.Models.Affirmations>
+@using iWishApp.ViewModels;
+@using iWishApp.Controllers;
+@using iWishApp.Data;
+
+
+
+@{
+    ViewData["Title"] = "Positive Affirmations";
+
+
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+    @*<StickyNavbar />, document.getElementById('sticky-navbar-container'));
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>@ViewData["Positive Affirmationsc"]</title>*@
+
+    <!-- Add the necessary CSS and JS files for React Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Make sure to include React and ReactDOM libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+
+    <!-- Make sure to include Babel standalone for JSX transpilation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.15.8/babel.min.js"></script>
+
+    <!-- Add the necessary JS files for React Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/2.0.0/react-bootstrap.min.js"></script>
+
+    <link href="/Users/briarispastiche/Projects/iWishApp/iWishApp/wwwroot/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+
+
+    <style>
+
+
+
+        .affirmations-list {
+            display: flex;
+            font-size: 300px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            padding: 0 50px;
+            padding-top: inherit;
+        }
+
+            .affirmations-list ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .affirmations-list h3 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+        .hidden-heading {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show-heading {
+            opacity: 1;
+        }
+
+        h2 {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            /*            text-shadow: 0 0 10px #da70d6;*/
+            text-shadow: 0 0 13px #ffeb00;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+
+
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="color:white;">
+            <a class="navbar-brand" href="#">..&iAM</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Affirmations" asp-action="Add">Change</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" asp-controller="Affirmations" asp-action="Delete">delete</a>
+                    </li>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0" asp-controller="Affirmations" asp-action="Index">
+
+                    <input type="Text" name="SearchString" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Type a keyword and hit enter">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container-fluid p-0">
+        <!-- Video background -->
+        <video src="/images/rainForest.mp4" autoplay loop muted playsinline style="position:fixed; top: 0; left: 0; width: 100%; height:100%; object-fit: cover;"></video>
+
+        <div class="position-absolute top-50 start-50 translate-middle">
+
+            <div class="affirmations-list">
+
+                <div class="position-relative">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="row">
+
+                                <div class="col-md-10 offset">
+                                    <div class="mr-md-4" style="padding-top: 10rem;">
+                                        <h1 class="display-4 text-center" style="color: white; padding-top: initial; text-align: justify-all; color: whitesmoke; text-shadow:#ffeb00;">Positive Affirmations</h1>
+
+                                        @if (Model.Count == 0)
+                                        {
+                                            <p style="font-size: 15px; color: whitesmoke; padding-top: 1rem;">No affirmations yet!</p>
+                                        }
+                                        else
+                                        {
+                                            <ul class="list-group mt-4">
+                                                @foreach (var affirmation in Model)
+                                                {
+                                                    <h2 class="hidden-heading" style="color: white;">
+                                                        @affirmation.Text
+                                                    </h2>
+                                                }
+                                            </ul>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @*<script src="subscribe.js"></script>
+    <script>// Function to save the content
+        function saveContent() {
+            // Get the edited title and paragraph text
+            const title = document.getElementById('title').textContent;
+            const paragraph = document.getElementById('paragraph').textContent;
+
+            // Send the content to the server
+            const data = {
+                title: title,
+                paragraph: paragraph
+            };
+
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message);
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('An error occurred. Please try again later.');
+                });
+        }</script>*@
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="/Users/briarispastiche/Projects/iWishApp/iWishApp/wwwroot/css/bootstrap.min.css"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>window.addEventListener('DOMContentLoaded', function () {
+            const headings = document.querySelectorAll('.hidden-heading');
+            let delay = 0;
+
+            headings.forEach(function (heading) {
+                setTimeout(function () {
+                    heading.classList.add('show-heading');
+                }, delay * 1000); // Multiply the delay by 1000 to convert to milliseconds
+                delay += 0.5; // Adjust the delay between each heading
+            });
+        });</script>
+
+    @*<footer class="border-top footer text-muted" style="position:fixed;">
+            <div class="container">
+                &copy; 2023 - iWishApp- <a asp-area="" asp-controller="Home" asp-action="Index">Privacy</a>
+            </div>
+        </footer>*@
+
+</body>
+
+
+</html>

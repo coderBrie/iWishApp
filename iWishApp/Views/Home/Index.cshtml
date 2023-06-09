@@ -1,9 +1,761 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using iWishApp.Controllers;
+@using iWishApp.Data;
+@using iWishApp.Models;
+@using iWishApp;
+@using iWishApp.ViewModels;
+@*@using iWishApp.ViewModels.BlogEntryViewModel;*@
+
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@*<------------------------------------------------------------------------------------------------->*@
 
+<!DOCTYPE html>
+<html>
+<head>
+;    <style>
+        p {
+            /*            color: #da70d6;*/
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            /*            text-shadow: 0 0 10px #da70d6;*/
+            text-shadow: 0 0 9px #DA70D6;
+            text-decoration-line: underline;
+            
+            
+            
+        
+
+
+        }
+
+
+    h3 {
+        /*            color: #da70d6;*/
+        color: #808080;
+        font-size: 35px;
+        font-weight: bold;
+        /*            text-shadow: 0 0 10px #da70d6;*/
+        text-shadow: 0 0 10px #00CCFF;
+        background-color: rgba(255, 255, 255, 0.5);
+        background-origin: padding-box;
+        padding-inline: auto;
+/*        text-decoration-line: underline;*/
+        /*            opacity: 80%;*/
+    }
+
+    h2 {
+        /*            color: #da70d6;*/
+        color: #808080;
+        font-size: 20px;
+        font-weight: bold;
+        /*            text-shadow: 0 0 10px #da70d6;*/
+        text-shadow: 0 0 10px #800080;
+        background-color: rgba(204, 153, 255, 0.8);
+        background-origin: padding-box;
+        padding-inline: auto;
+        text-decoration-line: underline;
+        /*            opacity: 80%;*/
+    }
+
+
+
+        li {
+            color: #F5F5DC;
+            /*            font-size: 11px;*/
+            /*            font-weight: 300;*/
+            /*            text-shadow: 0 0 10px #da70d6;*/
+            text-shadow: 0 0 2px #F5F5DC;
+        }
+
+
+/*        img {
+            border-color: #ffeb00;
+            border:medium;
+            margin:10px;
+        }*/
+  
+    </style>
+</head>
+<body>
+
+    
+    <div class="container-fluid p-0">
+        <!-- Video background -->
+        <video src="/images/rainForest.mp4" autoplay loop muted playsinline style="position:fixed; top: 0; left: 0; width: 100%; height:100%; object-fit: cover;"></video>
+
+        @*<div class="position-absolute top-50 start-50 translate-middle">*@
+
+            <div id="colorlib-page">
+                <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+                <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+                    <nav id="colorlib-main-menu" role="navigation">
+                        <ul>
+                            <li class="colorlib-active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-controller="Affirmations" asp-action="Index">Affirmations</a></li>
+                            <li><a asp-controller="Home" asp-action="JournalEntry">Manifest</a></li>
+                            <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                            <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                        </ul>
+                    </nav>
+
+
+                    @*  <--------------------------------------- Crud feature ---------------------------------------------------------->  *@
+                    @*<------ add aword wrap for the span tag ----->*@
+                    @*<div class="colorlib-footer">
+                        <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"> 444 <span>Affirmations</span></a></h1>
+                        <div class="mb-4">
+                            <h3>Add to Wishlist</h3>
+                            <form action="#" class="colorlib-subscribe-form">
+                                <div class="form-group d-flex">
+                                    <div class="icon"><span class="icon-paper-plane"></span></div>
+                                    <input type="text" class="form-control" placeholder="Enter Affirmations">
+                                </div>
+                            </form>
+                            is license
+                        </div>*@
+
+
+                    <div class="colorlib-footer">
+                        <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);"><span class="d-inline-block text-wrap"> . .  & iAM</span></a></h1>
+                        <div class="mb-4">
+                            <h3>Add to Wishlist</h3>
+                            <form action="@Url.Action("Add", "Affirmations")" method="post" class="colorlib-subscribe-form">
+                                <div class="form-group d-flex">
+                                    <div class="icon"><span class="icon-paper-plane"></span></div>
+                                    <input type="text" name="Text" class="form-control" placeholder="Enter Affirmations">
+                                </div>
+                                <input type="submit" value="Add to Wishlist" class="btn btn-primary">
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    @*<--------------------->*@
+
+
+                    @*<---------------------------------------search feature ---------------------------------------------------------->*@
+                    <!--<p class="pfooter">-->
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <!--Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+                        <!-- Link back to Colorlib can't be removed. Templated under CC BY 3.0. -->
+                    <!--</p>-->
+            </div>
+            </aside> <!-- END COLORLIB-ASIDE -->
+            @*<---------------------------------------Wishlisht feature ---------------------------------------------------------->*@
+            <div id="colorlib-main">
+                <section class="ftco-section ftco-no-pt ftco-no-pb">
+                    <div class="container">
+                        <div class="row d-flex">
+                            <div class="col-xl-8 py-5 px-md-5">
+                                <div class="row pt-md-4">
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%; ">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2"><a href="single.html">Empowering Your Inner Voice:</a></h3>
+                                                <div class="meta-wrap">
+                                                    <p class="meta">
+                                                        <span><i class="icon-calendar mr-2"></i>May 12, 2023</span>
+                                                        @*<span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
+                                                        <span><i class="icon-comment2 mr-2"></i>44 Comment</span>
+
+                                                </div>
+                                                @*<div class="text text-2 pl-md-4">
+                            <h3 class="mb-2"><a href="single.html">@Model.Title</a></h3>
+                            <div class="meta-wrap">
+                                <p class="meta">
+                                    <span><i class="icon-calendar mr-2"></i>@Model.DateCreated</span>
+                                    <span><a href="single.html"><i class="icon-folder-o mr-2"></i>@Model.Category</a></span>
+                                    <span><i class="icon-comment2 mr-2"></i>@Model.CommentCount Comment</span>
+                                    <span><a href="@Url.Action("Edit", "Blog", new { id = Model.Id })" class="btn btn-primary">Edit</a></span>
+                                </p>
+                            </div>*@
+                                                @*<p>@Model.Content</p>
+                            </div>*@
+
+                                                @*<--------------------------------------- Wishlist feature ---------------------------------------------------------->*@
+
+
+                                                <p class="mb-4">In a world filled with self-doubt and negativity, affirmations stand as a powerful tool for empowering your inner voice.</p>
+
+                                                @*<------insert Audio File ------------>*@
+                                                @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+
+                                                <audio controls>
+                                                    <source src="/images/MeditationIntro.m4a" type="audio/mp3" />
+                                                </audio>
+
+                                                @*<------insert Audio File end ------------>*@
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<----------------------------111 test------------>*@
+
+
+                                    @*<div class="col-md-12">
+                    <div class="blog-entry ftco-animate d-md-flex">
+                        <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                        <div class="text text-2 pl-md-4">
+                            <h3 class="mb-2" style="color: navy;"> Wishes - What are your Affirmations</h3>
+
+                            @if (!string.IsNullOrEmpty(ViewBag.Goals))
+                            {
+                                <div class="affirmations-list">
+                                    <ul class="list-group mt-4">
+                                        <h3 style="color: white;">@ViewBag.Goals</h3>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                <form action="@Url.Action("AddGoals", "Home")" method="post" class="colorlib-subscribe-form">
+                                    <input type="text" name="goalsText" class="form-control" placeholder="Enter Goals" style="border: none; border-bottom: 1px solid white; color: white;">
+                                    <input type="submit" value="Affirm" class="btn btn-primary">
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>*@
+
+
+                                    @*<--------------test 222------------>*@
+
+
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2" style="color: navy;"> Wishes - What are your Affirmations</h3>
+
+                                                @if (!string.IsNullOrEmpty(ViewBag.UserAffirmation))
+                                                {
+                                                    <div class="affirmations-list">
+                                                        <ul class="list-group mt-4">
+                                                            <h2 style="color: white;">@ViewBag.UserAffirmation</h2>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form action="@Url.Action("AddAffirmation", "Home")" method="post" class="colorlib-subscribe-form">
+                                                        <input type="text" name="affirmationText" class="form-control" placeholder="Enter Affirmation" style="border: none; border-bottom: 1px solid white; color: white;">
+                                                        <input type="submit" value="Affirm" class="btn btn-primary">
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<---------------------------------------------- test 333  -------------------------------------------------->*@
+
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2" style="color: navy;">How Are you Achieving your Goal This Week?</h3>
+
+                                                @if (!string.IsNullOrEmpty(ViewBag.Goals))
+                                                {
+                                                    <div class="affirmations-list">
+                                                        <ul class="list-group mt-4">
+                                                            <h2 style="color: white;">@ViewBag.Goals</h2>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form action="@Url.Action("AddGoals", "Home")" method="post" class="colorlib-subscribe-form">
+                                                        <input type="text" name="goalsText" class="form-control" placeholder="Enter Plans" style="border: none; border-bottom: 1px solid white; color: white;">
+                                                        <input type="submit" value="Affirm" class="btn btn-primary">
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<----- end how--->*@
+
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2" style="color: navy;">Actions -</h3>
+
+                                                @if (!string.IsNullOrEmpty(ViewBag.Actions))
+                                                {
+                                                    <div class="affirmations-list">
+                                                        <ul class="list-group mt-4">
+                                                            <h2 style="color: white;">
+                                                                 @ViewBag.Actions
+                                                               
+                                                            </h2>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form action="@Url.Action("AddActions", "Home")" method="post" class="colorlib-subscribe-form">
+                                                        <input type="text" name="actionsText" class="form-control" placeholder="Enter Actions Taken" style="border: none; border-bottom: 1px solid white; color: white;">
+                                                        <input type="submit" value="Affirm" class="btn btn-primary">
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<----end actions------>*@
+
+
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2" style="color: navy;"> Weekly Reflections: </h3>
+
+                                                @if (!string.IsNullOrEmpty(ViewBag.Reflections))
+                                                {
+                                                    <div class="affirmations-list">
+                                                        <ul class="list-group mt-4">
+                                                            <h2 style="color: white;">@ViewBag.Reflections</h2>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form action="@Url.Action("AddReflections", "Home")" method="post" class="colorlib-subscribe-form">
+                                                        <input type="text" name="reflectionsText" class="form-control" placeholder="Enter Reflections" style="border: none; border-bottom: 1px solid white; color: white;">
+                                                        <input type="submit" value="Affirm" class="btn btn-primary">
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*</-----------------------------------------------------------------test 2 ------------------------------------------------------------------------------------>>*@
+
+                                    @*<--------------------------------------- wishlist feature ---------------------------------------------------------->*@
+                                    <!--<div class="col-md-12">
+            <div class="blog-entry ftco-animate d-md-flex">
+                <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                <div class="text text-2 pl-md-4">
+                    <h3 class="mb-2"><a href="single.html">Reclaiming My Time:</a></h3>
+                    <div class="meta-wrap">
+                        <p class="meta">
+                            <span>Sep 12, 2022</span>-->
+                                    @*<span><a href="single.html">Lifestyle</a></span>*@
+                                    <!--<span>5 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Time is a precious asset in self-care, as dedicating moments to oneself allows for rejuvenation, reflection, and personal growth. Incorporating positive affirmations within this time amplifies their impact, nurturing a positive mindset and empowering individuals to embrace self-love and inner strength.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>-->
+                                    @*<---------------------------------------search feature ---------------------------------------------------------->*@
+                                    <!--<div class="col-md-12">
+            <div class="blog-entry ftco-animate d-md-flex">
+                <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                <div class="text text-2 pl-md-4">
+                    <h3 class="mb-2"><a href="single.html">The Secret of Getting Ahead is Getting Started:</a></h3>
+                    <div class="meta-wrap">
+                        <p class="meta">
+                            <span>Aug 11,2022 </span>-->
+                                    @*<span><a href="single.html">Nature</a></span>*@
+                                    <!--<span>5 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">The secret of getting ahead lies in the power of positive affirmations, as they propel us to take that initial step towards our goals, manifesting the reality we desire. By affirming our capabilities and embracing a proactive mindset, we unleash the potential to turn dreams into tangible achievements.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">Unleashing Inner Potential: Harnessing the Magic of Positive Affirmations</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">
+                                <span>Aug 09, 2022</span>-->
+                                    @*<span><a href="single.html">Lifestyle</a></span>*@
+                                    <!--<span>22 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Explore the transformative effects of positive affirmations on self-belief, mindset, and personal growth, providing practical tips for incorporating affirmations into daily life to unlock untapped potential.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">The Art of Stillness: Exploring the Power of Meditation in Manifestinge</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">
+                                <span>July 02, 2022</span>-->
+                                    @*<span><a href="single.html">Travel</a></span>*@
+                                    <!--<span>5 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Dive into the world of meditation as we uncover its profound role in manifesting desires, enhancing mindfulness, and cultivating a deeper connection with oneself, guiding readers on how to establish a consistent meditation practice for manifesting positive outcomes.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">The Science of Manifestation: How Positive Affirmations Shape Reality</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">
+                                <span>June 14, 2022</span>-->
+                                    @*<span><a href="single.html">Travel</a></span>*@
+                                    <!--<span>5 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Delve into the scientific principles behind manifestation and positive affirmations, understanding the neurological and psychological mechanisms at play, while providing evidence-backed strategies to maximize their effectiveness in creating the life you envision.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">From Thought to Reality: Unleashing the Power of Affirmations</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">
+                                <span><i class="icon-calendar mr-2"></i>June 02, 2022</span>-->
+                                    @*<span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
+                                    <!--<span><i class="icon-comment2 mr-2"></i>7 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Explore the journey from thought to reality as we delve into the transformative impact of positive affirmations, unraveling the ways they shape our beliefs, behaviors, and actions, and offering guidance on crafting effective affirmations for manifestation.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">Manifesting Miracles: The Synergy of Affirmations and Law of Attractions</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">
+                                <span><i class="icon-calendar mr-2"></i>May 28, 2022</span>-->
+                                    @*<span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
+                                    <!--<span><i class="icon-comment2 mr-2"></i>4 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Discover the powerful synergy between affirmations and the Law of Attraction, as we delve into how aligning thoughts, emotions, and beliefs through affirmations can magnetize opportunities and manifest extraordinary outcomes.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">Awakening Abundance: Manifesting Prosperity Through Affirmations:</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">
+                                <span>May 14, 2022</span>-->
+                                    @*<span><a href="single.html">Lifestyle</a></span>*@
+                                    <!--<span>6 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Uncover the secrets to attracting abundance and prosperity into your life by harnessing the power of affirmations, as we delve into techniques for reprogramming the subconscious mind, embracing gratitude, and aligning with the frequency of abundance.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="blog-entry ftco-animate d-md-flex">
+                    <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                    <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2"><a href="single.html">Reclaiming Your Energy: Restoring Balance with Affirmations, Meditation, and Self-Care</a></h3>
+                        <div class="meta-wrap">
+                            <p class="meta">-->
+                                    @*<span><i class="icon-calendar mr-2"></i>April 04, 2022</span>
+                <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
+                                    <!--<span><i class="icon-comment2 mr-2"></i>9 Comments</span>
+                </p>
+            </div>
+            <p class="mb-4">Explore the rejuvenating power of self-care, affirmations, and meditation as we delve into how these practices can help restore balance, replenish energy, and promote holistic well-being, equipping readers with valuable tools and insights to reclaim their vitality and live life to the fullest.</p>-->
+                                    @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                    <!--</div>
+                </div>
+            </div>-->
+                                    <div class="col-md-12">
+                                        <div class="blog-entry ftco-animate d-md-flex">
+                                            <img src="/images/aboutMee.jpg" alt="About Me" style="width: 90px; height: 110px; border-radius: 55%;">
+                                            <div class="text text-2 pl-md-4">
+                                                <h3 class="mb-2"><a href="single.html">Radiate Self-Love: Elevating Self-Care with Affirmations and Meditation</a></h3>
+                                                <div class="meta-wrap">
+                                                    <p class="meta">
+                                                        @*<span><i class="icon-calendar mr-2"></i>April 03, 2022</span>*@
+                                                        @*<span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>*@
+                                                        @*<span><i class="icon-comment2 mr-2"></i>444 Comments</span>*@
+                                                    </p>
+                                                </div>
+                                                <p class="mb-4"> I want To Thank Me, I want to Thank Me for Believing in me, I want to thank me for doing all this hard work. I wanna thank me for having no days off. I want to thank me for never quitting. I want to thank me for always being a giver and trying to give more than I receive. I want to thank me for trying to do more right than wrong. I want to thank me for believing in me and being me at all times! </p>
+                                                @*<p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- END-->
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="block-27">
+                                            <ul>
+                                                <li><a href="#">&lt;</a></li>
+                                                <li class="active"><span>1</span></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">&gt;</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<---------------------------------------working side bar search feature ---------------------------------------------------------->*@
+                            <div class="sidebar-box subs-wrap img py-4" style="background-image: url(images/bg_1.jpg);">
+                                <div class="overlay"></div>
+                                <div class="sidebar-content">
+
+
+                                    <div>
+
+                                        @if (ViewBag.ChatbotResponse != null)
+                                        {
+                                            <p>Chatbot Response: @Html.Raw(ViewBag.ChatbotResponse)</p>
+                                        }
+
+
+                                    </div>
+                                    <form action="@Url.Action("Chatbot", "Home")" method="post">
+
+                                        <input type="text" name="userInput" placeholder="Ask a question">
+                                        <input type="submit" value="ASK" class="btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
+
+                           
+
+                            @*<---------- end side bar here -------->*@
+
+                            @*<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+
+        <div class="sidebar-box pt-md-4">
+            <form asp-controller="Affirmations" asp-action="Index" class="search-form">
+                <div class="form-group">
+                    <label for="SearchString">Search and you shall find: </label>
+                    <span class="icon icon-search"></span>
+                    <input type="Text" name="SearchString" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Type a keyword and hit enter">
+                </div>
+            </form>
+        </div>*@
+
+                            @*<form asp-action="Index" method="get">
+        <div class="form-group">
+            <label for="SearchString">Search and you shall find: </label>
+            <input type="Text" name="SearchString"
+                   value="@ViewBag.CurrentFilter" />*@
+
+                            @*<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+            <div class="sidebar-box pt-md-4">
+                <form asp-action="Index" method="get">
+                    <div class="form-group">
+                        <span class="icon icon-search"></span>
+                        <input type="text" class="form-control" placeholder="Type a keyword and hit enter" name="SearchString" value="@ViewBag.CurrentFilter">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>*@
+
+                            @*<---------------------------------------search feature ---------------------------------------------------------->*@
+                            <!--<div class="sidebar-box ftco-animate">
+    <h3 class="sidebar-heading">Weekly Topics</h3>
+    <ul class="categories">
+        <li><a href="#">Affirmations <span></span></a></li>
+        <li><a href="#">Manifesting <span></span></a></li>
+        <li><a href="#">Meditation <span></span></a></li>-->
+                            @*<li><a href="#">Career <span></span></a></li>
+        <li><a href="#">Finance <span></span></a></li>*@
+                            <!--</ul>
+    </div>-->
+                            @*<div class="sidebar-box ftco-animate">
+            <h3 class="sidebar-heading">Popular Articles</h3>
+            <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <div class="text">
+                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+                    <div class="meta">
+                        <div><a href="#"><span class="icon-calendar"></span> 04 04, 2021</a></div>
+                        <div><a href="#"><span class="icon-person"></span> Made by Briaris Sayles &copy;</a></div>
+                        <div><a href="#"><span class="icon-chat"></span> 10</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                <div class="text">
+                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+                    <div class="meta">
+                        <div><a href="#"><span class="icon-calendar"></span> 04 02, 2021</a></div>
+                        <div><a href="#"><span class="icon-person"></span> Made by Briaris Sayles &copy;</a></div>
+                        <div><a href="#"><span class="icon-chat"></span> 11</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                <div class="text">
+                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+                    <div class="meta">
+                        <div><a href="#"><span class="icon-calendar"></span> 04 01, 2021</a></div>
+                        <div><a href="#"><span class="icon-person"></span> Made by Briaris Sayles &copy;</a></div>
+                        <div><a href="#"><span class="icon-chat"></span> 12</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+                            @*<div class="sidebar-box ftco-animate">
+        <h3 class="sidebar-heading">Tag Cloud</h3>
+        <ul class="tagcloud">
+            <a href="#" class="tag-cloud-link">animals</a>
+            <a href="#" class="tag-cloud-link">human</a>
+            <a href="#" class="tag-cloud-link">people</a>
+            <a href="#" class="tag-cloud-link">cat</a>
+            <a href="#" class="tag-cloud-link">dog</a>
+            <a href="#" class="tag-cloud-link">nature</a>
+            <a href="#" class="tag-cloud-link">leaves</a>
+            <a href="#" class="tag-cloud-link">food</a>
+        </ul>*@
+                            @*</div>
+        <----------------------------------------------------Add Feature ------------------------------------ ------------------------------------- ----------->*@
+                            <!--<div class="sidebar-box subs-wrap img py-4" style="background-image: url(images/bg_1.jpg);">
+        <div class="overlay"></div>
+        <h3 class="mb-4 sidebar-heading">Newsletter</h3>
+        <p class="mb-4">Subscribe to Weekly Affirmations Email List</p>
+        <form action="#" class="subscribe-form">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Email Address">
+                <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
+            </div>
+        </form>
+    </div>-->
+                            @*<----end template ----->*@
+
+
+
+                            @*<----------------------------------------------------Add Feature ------------------------------------------------------------------------------------>*@
+                            @*<div class="sidebar-box ftco-animate">
+            <h3 class="sidebar-heading">Archives</h3>
+            <ul class="categories">
+                <li><a href="#">Decob14 2018 <span>(10)</span></a></li>
+                <li><a href="#">September 2018 <span>(6)</span></a></li>
+                <li><a href="#">August 2018 <span>(8)</span></a></li>
+                <li><a href="#">July 2018 <span>(2)</span></a></li>
+                <li><a href="#">June 2018 <span>(7)</span></a></li>
+                <li><a href="#">May 2018 <span>(5)</span></a></li>
+            </ul>
+        </div>*@
+
+
+                            @*<div class="sidebar-box ftco-animate">
+            <h3 class="sidebar-heading">The iWishApp &copy;</h3>
+            <p style="color: #212529"> iWishApp empowers individuals to set intentions, create personalized affirmations, and track their progress towards achieving their dreams. By harnessing the power of positive thinking and manifestation techniques, iWishApp serves as a transformative tool, helping users manifest their desires, cultivate a positive mindset, and ultimately lead more fulfilling lives.</p>
+        </div>*@
+                        </div><!-- END COL -->
+                        </div>
+                    </div>
+                </section>
+            </div><!-- END COLORLIB-MAIN -->
+        </div><!-- END COLORLIB-PAGE -->
+        </div>
+    
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script src="js/google-map.js"></script>
+        <script src="js/main.js"></script>
+
+</body>
+
+
+@*<------------------------------------------------------------------------------------------------->*@
+<!--<header>
+    <div class="text-center">
+        <h1 class="display-4">Daily Affirmations</h1>-->
+@*<p>*@
+@*beginning of search bar below*@
+
+<!--<form asp-controller="Affirmations" asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="Search">Search and you shall find: </label>
+        <input type="Text" name="Search"
+               value="@ViewData["CurrentFilter"]"-->
+@*button for search feature*@
+
+<!--<input type="submit" value="Searching" class="btn btn-primary" />
+
+    </div>
+</form>-->
+@*end of search bar*@
+<!--<br>
+
+        <a asp-controller="Affirmations" asp-action="Add" class="btn btn-primary">Add Affirmations</a>-->
+@*</p>*@
+<!--</div>
+
+</header>
+
+
+
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-12">-->
+@*----put a bootstrap image tag for a responsive background belove---- .*@
+@*<div class="jumbotron" style="background-image: url('https://example.com/image.jpg'); background-size: cover;">*@
+
+
+<!--<h2 class="display-4 text-white font-weight-bold">Your Wish Is Your Command</h2>
+                <p class="lead text-white font-weight-bold">Affirm It</p>
+                <p>
+                   <a href="#" class="btn btn-primary btn-lg">Affirm It</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>-->
+</html>
